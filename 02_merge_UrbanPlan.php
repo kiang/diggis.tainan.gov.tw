@@ -1,9 +1,4 @@
 <?php
-$jsonPath = __DIR__ . '/geojson/UrbanPlan';
-if(!file_exists($jsonPath)) {
-  mkdir($jsonPath, 0777, true);
-}
-
 $fc = array(
   'type' => 'FeatureCollection',
   'features' => array(),
@@ -60,7 +55,7 @@ foreach(glob(__DIR__ . '/raw/UrbanPlan/*.json') AS $jsonFile) {
   }
 }
 
-file_put_contents(__DIR__ . '/geojson/UrbanPlan.json', json_encode($fc));
+file_put_contents(__DIR__ . '/topojson/UrbanPlan.json', json_encode($fc));
 
 function twd97_to_latlng($x, $y) {
     $a = 6378137.0;
