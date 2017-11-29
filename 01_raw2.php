@@ -28,7 +28,7 @@ foreach($layers AS $layerUrl => $layerName) {
       $targetFile = $layerPath . '/data_' . $lastId . '.json';
       if(!file_exists($targetFile)) {
         $q = implode(',', $objects);
-        $json = gzdecode(shell_exec("curl -k 'http://59.125.203.147/arcgis/rest/services/{$layerUrl}/query?objectIds={$q}&outFields=*&returnGeometry=true&f=json' -H 'Host: 59.125.203.147' -H 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0' -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.5' -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Referer: http://59.125.203.147/DIG_SYS/map.aspx?type=pipe' -H 'Connection: keep-alive'"));
+        $json = shell_exec("curl -k 'http://59.125.203.147/AuthToken/proxy.ashx?http://59.125.203.147/arcgis/rest/services/{$layerUrl}/query?objectIds={$q}&outFields=*&returnGeometry=true&f=json' -H 'Host: 59.125.203.147' -H 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0' -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.5' -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Referer: http://59.125.203.147/DIG_SYS/map.aspx?type=pipe' -H 'Connection: keep-alive'");
         $obj = json_decode($json, true);
         if(!isset($obj['features'][0])) {
           file_put_contents($idFile, $lastId);
