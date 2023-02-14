@@ -9,7 +9,10 @@ $count = [];
 foreach (glob(__DIR__ . '/raw/Road/*.json') as $jsonFile) {
     $json = json_decode(file_get_contents($jsonFile), true);
     foreach ($json['features'] as $f) {
-        if ($f['attributes']['TOWN'] !== '龍崎區' || $f['attributes']['ROADNUM'] !== '縣182') {
+        if ($f['attributes']['TOWN'] !== '龍崎區') {
+            continue;
+        }
+        if ($f['attributes']['ROADNUM'] != '縣182' && $f['attributes']['ID'] != '107234') {
             continue;
         }
 
